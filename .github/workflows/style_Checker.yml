@@ -3,18 +3,22 @@ name: Lint
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: '18.x'
+          cache: 'npm'
+      
       - name: Install Dependencies
-        run: |
-          npm install -g prettier eslint
+        run: npm ci
+        
       - name: Check Code Formatting
-        run: |
-          npx prettier --check .
-          npx eslint --ext .js,.html .
+        run: npx prettier --check .
+        
+      - name: Run ESLint
+        run: npx eslint .
