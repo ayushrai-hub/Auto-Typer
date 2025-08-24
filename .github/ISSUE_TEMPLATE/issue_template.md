@@ -1,10 +1,9 @@
 ---
 name: Bug Report / Feature Request
 about: Use this template for reporting a bug or suggesting a new feature.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 ## 🐛 Bug Report or 🚀 Feature Request? (Choose one)

@@ -1,49 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <title>PasteHuman</title>
+    <link rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        background-color: #efeae4;
+        color: #000000;
+        padding: 15px;
+        width: 300px;
+      }
 
-<head>
-  <title>PasteHuman</title>
-  <link rel="stylesheet" type="text/css">
-  <style>
-    body {
-      background-color: #EFEAE4;
-      color: #000000;
-      padding: 15px;
-      width: 300px;
-    }
+      .logo {
+        width: 300px;
+        display: block;
+        margin: 0 auto 20px;
+      }
 
-    .logo {
-      width: 300px;
-      display: block;
-      margin: 0 auto 20px;
-    }
+      h1,
+      button {
+        text-align: center;
+        width: 100%;
+      }
 
-    h1,
-    button {
-      text-align: center;
-      width: 100%;
-    }
+      button {
+        background-color: #000000;
+        border: none;
+        color: #ffffff;
+        padding: 15px 32px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px auto;
+        cursor: pointer;
+      }
+    </style>
+  </head>
 
-    button {
-      background-color: #000000;
-      border: none;
-      color: #ffffff;
-      padding: 15px 32px;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px auto;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <img src="PasteHuman_Logo.jpg" alt="Logo" class="logo">
-  <p>Right click on a textbox and select "Emulate typing" to paste clipboard contents as if typing.</p>
-  <p>Alternatively, you can click the "Start typing" button and then click on the textbox within 5 seconds.</p>
-  <button id="startTyping">Start typing</button>
-  <script src="popup.js"></script>
-</body>
-
+  <body>
+    <img src="PasteHuman_Logo.jpg" alt="Logo" class="logo" />
+    <p>
+      Right click on a textbox and select "Emulate typing" to paste clipboard
+      contents as if typing.
+    </p>
+    <p>
+      Alternatively, you can click the "Start typing" button and then click on
+      the textbox within 5 seconds.
+    </p>
+    <button id="startTyping">Start typing</button>
+    <script src="popup.js"></script>
+  </body>
 </html>

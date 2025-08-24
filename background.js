@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  console.log('background.js: Context menu clicked:', info.menuItemId); // Log context menu item clicked
+  console.log("background.js: Context menu clicked:", info.menuItemId); // Log context menu item clicked
 
   if (info.menuItemId === "pasteHuman") {
     chrome.tabs.sendMessage(tab.id, { action: "emulateTyping" });
