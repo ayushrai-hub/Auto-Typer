@@ -1,0 +1,2 @@
+(()=>{"use strict";chrome.runtime.onMessage.addListener((e,t,o)=>{if("get-clipboard-text"===e.type){const e=document.createElement("textarea");document.body.appendChild(e),e.focus(),document.execCommand("paste");const t=e.value;document.body.removeChild(e),o(t)}return!0})})();
+//# sourceMappingURL=offscreen.js.map

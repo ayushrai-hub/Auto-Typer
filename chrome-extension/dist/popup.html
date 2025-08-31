@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PasteHuman - Auto Typer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 320px;
+      min-height: 400px;
+      padding: 0;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+    
+    .container {
+      background: white;
+      margin: 0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      margin: 0 0 5px 0;
+      font-size: 20px;
+      color: #4a5568;
+    }
+    
+    .header p {
+      margin: 0;
+      font-size: 12px;
+      color: #718096;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 8px;
+    }
+    
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 13px;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .input-group label {
+      font-size: 12px;
+      color: #4a5568;
+      min-width: 80px;
+    }
+    
+    input[type="number"], select {
+      flex: 1;
+      padding: 6px 8px;
+      border: 2px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      margin: 0;
+    }
+    
+    .checkbox-group label {
+      font-size: 12px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+    
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .button-group.single {
+      grid-template-columns: 1fr;
+    }
+    
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #5a67d8;
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+      background: #cbd5e0;
+    }
+    
+    .btn-success {
+      background: #48bb78;
+      color: white;
+    }
+    
+    .btn-success:hover:not(:disabled) {
+      background: #38a169;
+    }
+    
+    .btn-warning {
+      background: #ed8936;
+      color: white;
+    }
+    
+    .btn-warning:hover:not(:disabled) {
+      background: #dd6b20;
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .status {
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 10px;
+      transition: all 0.3s;
+    }
+    
+    .status.info {
+      background: #bee3f8;
+      color: #2c5282;
+      border: 1px solid #90cdf4;
+    }
+    
+    .status.success {
+      background: #c6f6d5;
+      color: #22543d;
+      border: 1px solid #9ae6b4;
+    }
+    
+    .status.error {
+      background: #fed7d7;
+      color: #c53030;
+      border: 1px solid #feb2b2;
+    }
+    
+    .status.warning {
+      background: #fefcbf;
+      color: #744210;
+      border: 1px solid #f6e05e;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 8px;
+      background: #f7fafc;
+      border-radius: 4px;
+    }
+    
+    .stat-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .stat-label {
+      font-size: 10px;
+      color: #718096;
+      margin-top: 2px;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: #667eea;
+      transition: width 0.3s;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🤖 PasteHuman</h1>
+      <p>Human-like typing automation</p>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">Custom Text (optional)</div>
+      <textarea id="customText" placeholder="Leave empty to use clipboard content..."></textarea>
+    </div>
+    
+    <div class="section">
+      <div class="section-title">Typing Settings</div>
+      
+      <div class="input-group">
+        <label>Speed:</label>
+        <select id="speedPreset">
+          <option value="slow">Slow (200-800ms)</option>
+          <option value="normal" selected>Normal (100-400ms)</option>
+          <option value="fast">Fast (50-200ms)</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      
+      <div class="input-group" id="customSpeedGroup" style="display: none;">
+        <label>Delay (ms):</label>
+        <input type="number" id="customDelay" min="10" max="2000" value="150">
+      </div>
+      
+      <div class="input-group">
+        <label>Start Delay:</label>
+        <input type="number" id="startDelay" min="0" max="30" value="3" step="0.5">
+        <span style="font-size: 11px; color: #718096;">seconds</span>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="enableMistakes" checked>
+        <label for="enableMistakes">Simulate typing mistakes</label>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="enablePauses" checked>
+        <label for="enablePauses">Natural thinking pauses</label>
+      </div>
+    </div>
+    
+    <div class="button-group" id="mainButtons">
+      <button class="btn-primary" id="startBtn">▶ Start Typing</button>
+      <button class="btn-secondary" id="clipboardBtn">📋 Get Clipboard</button>
+    </div>
+    
+    <div class="button-group single" id="stopButtonGroup" style="display: none;">
+      <button class="btn-warning" id="stopBtn">⏹ Stop Typing</button>
+    </div>
+    
+    <div class="stats" id="statsSection" style="display: none;">
+      <div class="stat">
+        <div class="stat-value" id="wpmStat">0</div>
+        <div class="stat-label">WPM</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="progressStat">0</div>
+        <div class="stat-label">% Done</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="timeStat">0s</div>
+        <div class="stat-label">Elapsed</div>
+      </div>
+    </div>
+    
+    <div class="progress-bar" id="progressBarContainer" style="display: none;">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+    
+    <div class="status info" id="status">Ready to type</div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
